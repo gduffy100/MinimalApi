@@ -2,7 +2,7 @@
 {
     public class Car
     {
-        public int id { get; set; }
+        public int Id { get; set; }
         public string TeamName { get; set; }
         public int Speed { get; set; }
         public double MalfunctionChance { get; set; }

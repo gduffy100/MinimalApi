@@ -9,7 +9,7 @@ namespace WebUI.Features.Cars
     public class CarsController : ControllerBase
     {
         [HttpGet]
-        public ActionResult<List<Car>> getCars()
+        public ActionResult<List<Car>> GetCars()
         {
             var cars = new List<Car>();
             var car1 = new Car
@@ -29,5 +29,62 @@ namespace WebUI.Features.Cars
 
             return Ok(cars);
         }
+        [HttpGet]
+        [Route("{id}")]
+        public ActionResult<Car> GetCar(int id)
+        {
+            var car1 = new Car
+            {
+                TeamName = "team A",
+                Speed = 100,
+                MalfunctionChance = 0.2
+            };
+            return Ok(car1);
+        }
+
+        //create car endpoint
+        [HttpPost]
+        public ActionResult<Car> CreateCar(Car car)
+        {
+            var newCar = new Car
+            {
+                Id = car.Id,
+                TeamName = car.TeamName,
+                Speed = car.Speed,
+                MalfunctionChance = car.MalfunctionChance,
+                // DistanceCoveredInMiles = car.DistanceCoveredInMiles,
+                //FinishedRace = car.FinishedRace,
+                // RacedForHours = car.RacedForHours
+            };
+
+            return Ok(newCar);
+        }
+        //update car
+        [HttpPut]
+        [Route("{id}")]
+        public ActionResult<Car> UpdateCar(Car car)
+        {
+            var updateCar = new Car
+            {
+                Id = car.Id,
+                TeamName = car.TeamName,
+                Speed = car.Speed,
+                MalfunctionChance = car.MalfunctionChance,
+                // DistanceCoveredInMiles = car.DistanceCoveredInMiles,
+                //FinishedRace = car.FinishedRace,
+                // RacedForHours = car.RacedForHours
+            };
+
+            return Ok(updateCar);
+        }
+
+
+        //delete car
+        [HttpDelete]
+        public ActionResult DeleteCar(Car car)
+        {
+            return Ok("Car with id {id} was successfully deleted");
+        }
+
     }
 }
