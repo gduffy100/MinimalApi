@@ -3,7 +3,11 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 16
 VisualStudioVersion = 16.0.32126.315
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RallyRaidWebApi", "RallyRaidWebApi.csproj", "{657601A2-3E56-47E7-860D-C295FACA9EA9}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Domain", "Domain\Domain.csproj", "{C1D54546-5FD1-4BB6-B8A1-44EF08D816B7}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Infrastructure", "Infrastructure\Infrastructure.csproj", "{E15D44DF-3087-4472-9981-DEDF61C994AE}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WebUI", "WebUI\WebUI.csproj", "{282FA359-85DA-416A-BDA2-E54E6674DE7C}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -11,10 +15,18 @@ Global
 		Release|Any CPU = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{657601A2-3E56-47E7-860D-C295FACA9EA9}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{657601A2-3E56-47E7-860D-C295FACA9EA9}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{657601A2-3E56-47E7-860D-C295FACA9EA9}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{657601A2-3E56-47E7-860D-C295FACA9EA9}.Release|Any CPU.Build.0 = Release|Any CPU
+		{C1D54546-5FD1-4BB6-B8A1-44EF08D816B7}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C1D54546-5FD1-4BB6-B8A1-44EF08D816B7}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C1D54546-5FD1-4BB6-B8A1-44EF08D816B7}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C1D54546-5FD1-4BB6-B8A1-44EF08D816B7}.Release|Any CPU.Build.0 = Release|Any CPU
+		{E15D44DF-3087-4472-9981-DEDF61C994AE}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E15D44DF-3087-4472-9981-DEDF61C994AE}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E15D44DF-3087-4472-9981-DEDF61C994AE}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E15D44DF-3087-4472-9981-DEDF61C994AE}.Release|Any CPU.Build.0 = Release|Any CPU
+		{282FA359-85DA-416A-BDA2-E54E6674DE7C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{282FA359-85DA-416A-BDA2-E54E6674DE7C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{282FA359-85DA-416A-BDA2-E54E6674DE7C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{282FA359-85DA-416A-BDA2-E54E6674DE7C}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
