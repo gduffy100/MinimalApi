@@ -22,24 +22,7 @@ namespace WebUI.Features.Cars
         {
             var cars = _context.Cars.ToList();
 
-            /*
-            var cars = new List<Car>();
-            
-            var car1 = new Car
-            {
-                TeamName = "team A",
-                Speed = 100,
-                MalfunctionChance = 0.2
-            };
-            var car2 = new Car
-            {
-                TeamName = "team B",
-                Speed = 90,
-                MalfunctionChance = 0.1
-            };
-            cars.Add(car1);
-            cars.Add(car2);
-            */
+           
 
             return Ok(cars);
         }
