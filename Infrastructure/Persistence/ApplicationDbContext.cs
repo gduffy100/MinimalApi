@@ -4,13 +4,17 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Microsoft.EntityFrameworkCore;
-using Domain
 using Domain.Entities;
 
 namespace Infrastructure.Persistence
 {
-    public class ApplicationDbContext
+    public class ApplicationDbContext : DbContext // must inherit from this to be used in db connection
     {
+        //need constructor 
+        public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options) :base(options) // inherit base options
+        {
+            
+        }
         public DbSet<Car> Cars { get; set; }
     }
 }
