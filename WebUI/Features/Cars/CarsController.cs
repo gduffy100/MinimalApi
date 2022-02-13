@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using Domain.Entities;
 using Infrastructure.Persistence;
 using System.Linq;
+using WebUI.Features.Cars.Models;
 
 namespace WebUI.Features.Cars
 {
@@ -42,8 +43,14 @@ namespace WebUI.Features.Cars
 
         //create car endpoint
         [HttpPost]
-        public ActionResult<Car> CreateCar(Car car)
+        public ActionResult<Car> CreateCar(CarCreateModel carModel)
         {
+            var car = new Car
+            {
+                TeamName = carModel.TeamName,
+                Speed = carModel.Speed,
+                MalfunctionChance = carModel.MalfunctionChance
+            };
             _context.Cars.Add(car);
             _context.SaveChanges();
             
@@ -52,18 +59,18 @@ namespace WebUI.Features.Cars
         //update car
         [HttpPut]
         [Route("{id}")]
-        public ActionResult<Car> UpdateCar(Car car)
+        public ActionResult<Car> UpdateCar(CarUpdateModel carModel)
         {
-            var dbCar = _context.Cars.FirstOrDefault(x => x.Id == car.Id);
+            var dbCar = _context.Cars.FirstOrDefault(x => x.Id == carModel.Id);
 
             if (dbCar == null)
             {
-                return NotFound($"Car with id:{car.Id} not found");
+                return NotFound($"Car with id:{carModel.Id} not found");
             }
 
-            dbCar.TeamName = car.TeamName;
-            dbCar.Speed = car.Speed;
-            dbCar.MalfunctionChance = car.MalfunctionChance;
+            dbCar.TeamName = carModel.TeamName;
+            dbCar.Speed = carModel.Speed;
+            dbCar.MalfunctionChance = carModel.MalfunctionChance;
           
             _context.SaveChanges();
 
