@@ -83,7 +83,7 @@ namespace WebUI.Features.Cars
         [HttpDelete]
         public ActionResult DeleteCar(Car car)
         {
-            return Ok($"Car with id {id} was successfully deleted");
+            return Ok($"Car with id {car.Id} was successfully deleted");
         }
 
     }
