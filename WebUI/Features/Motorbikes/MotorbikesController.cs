@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using Domain.Entities;
 using Infrastructure.Persistence;
 using System.Linq;
+using WebUI.Features.Motorbikes.Models;
 
 namespace WebUI.Features.Motorbikes
 {
@@ -42,28 +43,35 @@ namespace WebUI.Features.Motorbikes
 
         //create Motorbike endpoint
         [HttpPost]
-        public ActionResult<Motorbike> CreateMotorbike(Motorbike Motorbike)
+        public ActionResult<Motorbike> CreateMotorbike(MotorbikeCreateModel MotorbikeModel)
         {
-            _context.Motorbikes.Add(Motorbike);
+            var motorbike = new Motorbike
+            {
+                TeamName = MotorbikeModel.TeamName,
+                Speed = MotorbikeModel.Speed,
+                MalfunctionChance = MotorbikeModel.MalfunctionChance
+            };
+
+            _context.Motorbikes.Add(motorbike);
             _context.SaveChanges();
 
-            return Ok(Motorbike);
+            return Ok(motorbike);
         }
         //update Motorbike
         [HttpPut]
         [Route("{id}")]
-        public ActionResult<Motorbike> UpdateMotorbike(Motorbike Motorbike)
+        public ActionResult<Motorbike> UpdateMotorbike(MotorbikeUpdateModel MotorbikeModel)
         {
-            var dbMotorbike = _context.Motorbikes.FirstOrDefault(x => x.Id == Motorbike.Id);
+            var dbMotorbike = _context.Motorbikes.FirstOrDefault(x => x.Id == MotorbikeModel.Id);
 
             if (dbMotorbike == null)
             {
-                return NotFound($"Motorbike with id:{Motorbike.Id} not found");
+                return NotFound($"Motorbike with id:{MotorbikeModel.Id} not found");
             }
 
-            dbMotorbike.TeamName = Motorbike.TeamName;
-            dbMotorbike.Speed = Motorbike.Speed;
-            dbMotorbike.MalfunctionChance = Motorbike.MalfunctionChance;
+            dbMotorbike.TeamName = MotorbikeModel.TeamName;
+            dbMotorbike.Speed = MotorbikeModel.Speed;
+            dbMotorbike.MalfunctionChance = MotorbikeModel.MalfunctionChance;
 
             _context.SaveChanges();
 
