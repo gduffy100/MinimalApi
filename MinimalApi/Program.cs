@@ -102,6 +102,77 @@ app.MapDelete("api/cars/{id}", (int id, RaceDb db) => {
 
 #region motorbike endpoints
 
+app.MapGet("api/motorbikes", (RaceDb db) => {
+
+    var motorbikes = db.Motorbikes.ToList();
+
+    return Results.Ok(motorbikes);
+}
+
+
+).WithName("GetMotorbikes");
+
+app.MapGet("api/motorbikes/{id}", (int id, RaceDb db) => {
+
+    var motorbike = db.Motorbikes.FirstOrDefault(x => x.Id == id);
+
+    if (motorbike == null)
+    {
+        return Results.NotFound($"Car with id:{id} not found");
+    }
+    return Results.Ok(motorbike);
+
+}).WithName("GetMotorbike");
+
+
+app.MapPut("api/motorbikes/{id}", (int id, RaceDb db, MotorbikeUpdateModel motorbikeModel) => {
+
+    var dbCar = db.Motorbikes.FirstOrDefault(x => x.Id == motorbikeModel.Id);
+
+    if (dbCar == null)
+    {
+        return Results.NotFound($"Car with id:{motorbikeModel.Id} not found");
+    }
+
+    dbCar.TeamName = motorbikeModel.TeamName;
+    dbCar.Speed = motorbikeModel.Speed;
+    dbCar.MalfunctionChance = motorbikeModel.MalfunctionChance;
+
+    db.SaveChanges();
+
+    return Results.Ok(dbCar);
+
+}).WithName("UpdateMotorbike");
+
+app.MapPost("api/motorbikes", (MotorbikeCreateModel motorbikeModel, RaceDb db) => {
+
+    var motorbike = new Motorbike
+    {
+        TeamName = motorbikeModel.TeamName,
+        Speed = motorbikeModel.Speed,
+        MalfunctionChance = motorbikeModel.MalfunctionChance
+    };
+    db.Motorbikes.Add(motorbike);
+    db.SaveChanges();
+
+    return Results.Ok(motorbike);
+
+}).WithName("CreateMotorbike");
+
+app.MapDelete("api/motorbikes/{id}", (int id, RaceDb db) => {
+
+    var dbMotorbike = db.Motorbikes.FirstOrDefault(x => x.Id == id);
+
+    if (dbMotorbike == null)
+    {
+        return Results.NotFound($"Motorbike with id:{id} not found");
+    }
+    db.Remove(dbMotorbike);
+    db.SaveChanges();
+
+    return Results.Ok($"Motorbike with ID: {id} has been deleted");
+}).WithName("DeleteMotorbike");
+
 #endregion
 
 app.Run();
@@ -146,6 +217,22 @@ public record Motorbike //does not take parameters // record is new c#9 concept
     public int RacedForHours { get; set; }
 }
 
+public record MotorbikeUpdateModel //does not take parameters // record is new c#9 concept
+{
+    public int Id { get; set; }
+    public string? TeamName { get; set; } // ? to declare as nullable
+    public int Speed { get; set; }
+    public double MalfunctionChance { get; set; }
+}
+
+public record MotorbikeCreateModel //does not take parameters // record is new c#9 concept
+{
+    public string? TeamName { get; set; } // ? to declare as nullable
+    public int Speed { get; set; }
+    public double MalfunctionChance { get; set; }
+}
+
+
 #endregion
 
 #region persistence
@@ -157,7 +244,8 @@ public class RaceDb : DbContext // must inherit from this to be used in db conne
         {
     }
     public DbSet<Car>? Cars { get; set; }
-    
+    public DbSet<Motorbike>? Motorbikes { get; set; }
+
 }
 
 #endregion
